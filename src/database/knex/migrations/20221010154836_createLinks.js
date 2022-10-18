@@ -1,8 +1,7 @@
 exports.up = knex => knex.schema.createTable("links", table => {
     table.increments("id");
     table.text("url");
-    table.integer("notes_id").references("id").inTable("notes").onDelete("CASCADE");
-    //table.integer("user_id").reference("id").inTable("users");
+    table.integer("note_id").references("id").inTable("notes").onDelete("CASCADE");
 
     table.timestamp("created_at").default(knex.fn.now());
 });

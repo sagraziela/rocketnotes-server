@@ -3,18 +3,19 @@ const AppError = require("../utils/AppError");
 const sqliteConnection = require('../database/sqlite');
 
 class UsersController {
-    // Boas práticas: controllers têm no máximo 5 métodos!
+
     async create(request, response) {
+        console.log("Passou pelo usersController")
         const { name, email, password } = request.body;
 
         const database = await sqliteConnection();
         const checkIfUserExists = await database.get("SELECT * FROM users WHERE email = (?)", [email])
 
         if (checkIfUserExists) {
-            throw new AppError("Este usuário já existe.")
+            throw new AppError("O e-mail informado já está sendo utilizado por outro usuário.")
         }
 
-        const hashedPassword = await hash(password, 8)
+        const hashedPassword = await hash(password, 8);
 
         await database.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
         [ name, email, hashedPassword ]
