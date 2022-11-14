@@ -13,7 +13,6 @@ function EnsureAuthentication(request, response, next) {
 
     try {
         const { sub: user_id } = verify(token, authConfig.JWT.secret);
-        console.log(user_id)
 
         request.user = {
             id: Number(user_id)
@@ -21,7 +20,7 @@ function EnsureAuthentication(request, response, next) {
 
         return next()
     } catch {
-        throw AppError('JWT token inválido.', 401)
+        throw new AppError('JWT token inválido.', 401)
     }
 }
 

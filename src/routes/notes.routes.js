@@ -6,7 +6,7 @@ const notesRoutes = Router();
 
 const notesController = new NotesController();
 
-notesRoutes.use(ensureAuthentication)
+notesRoutes.use(ensureAuthentication);
 
 notesRoutes.get("/", notesController.index);
 notesRoutes.post("/", notesController.create);

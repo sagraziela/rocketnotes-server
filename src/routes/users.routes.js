@@ -13,6 +13,6 @@ const upload = multer(uploadConfig.MULTER);
 
 usersRoutes.post("/", usersController.create);
 usersRoutes.put("/", ensureAuthentication, usersController.update);
-usersRoutes.patch("/", ensureAuthentication, upload.single("avatar"), usersAvatarController.update)
+usersRoutes.patch("/avatar", ensureAuthentication, upload.single("avatar"), usersAvatarController.update)
 
 module.exports = usersRoutes;
